@@ -1,0 +1,73 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Admin {
+  id       String @id @default(cuid())
+  username String @unique
+  password String
+}
+
+model Device {
+  id              String   @id @default(cuid())
+  tagNumber       String   @unique
+  itemCategory    String   @default("Electronic Appliance")
+  serialNumber    String?
+  deviceType      String
+  brand           String
+  marketValue     Float
+  receivedDate    DateTime @default(now())
+  receivedFrom    String
+  status          String   // 'Working', 'Under Repair', 'Broken', 'Lost'
+  currentLocation String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  borrows         BorrowRecord[]
+  maintenance     MaintenanceLog[]
+}
+
+model BorrowRecord {
+  id                 String   @id @default(cuid())
+  deviceId           String
+  device             Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  borrowerName       String
+  borrowDate         DateTime @default(now())
+  expectedReturnDate DateTime
+  actualReturnDate   DateTime?
+  status             String   @default("Active") // 'Active', 'Returned'
+  notes              String?
+  createdAt          DateTime @default(now())
+}
+
+model MaintenanceLog {
+  id          String   @id @default(cuid())
+  deviceId    String
+  device      Device   @relation(fields: [deviceId], references: [id], onDelete: Cascade)
+  description String
+  cost        Float    @default(0)
+  date        DateTime @default(now())
+  createdAt   DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String
+  entityId  String?
+  details   String
+  userName  String   @default("Admin")
+  createdAt DateTime @default(now())
+}
+
+model DropdownOption {
+  id       String @id @default(cuid())
+  category String // 'DEVICE_TYPE', 'BRAND', 'LOCATION'
+  value    String
+
+  @@unique([category, value])
+}

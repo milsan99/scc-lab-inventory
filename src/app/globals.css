@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-900: #1e3a8a;
+  
+  --color-dark-bg: #060b13;
+  --color-dark-surface: #0f172a;
+  --color-dark-surface-hover: #1e293b;
+  --color-dark-border: #1e293b;
+  
+  --color-success-400: #34d399;
+  --color-success-500: #10b981;
+  --color-warning-400: #fbbf24;
+  --color-warning-500: #f59e0b;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+}
+
+:root {
+  --background: var(--color-dark-bg);
+  --foreground: #f8fafc;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.glass {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.glass-panel {
+  background: rgba(30, 41, 59, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.input-style {
+  @apply w-full px-4 py-3 bg-slate-900/40 border border-slate-700/50 rounded-xl focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500 outline-none text-white transition-all duration-300 placeholder:text-slate-500 shadow-inner;
+}
+
+.btn-primary {
+  @apply px-5 py-2.5 bg-gradient-to-b from-primary-500 to-primary-600 hover:from-primary-400 hover:to-primary-500 text-white rounded-xl font-medium transition-all duration-300 shadow-[0_0_15px_rgba(59,130,246,0.25)] hover:shadow-[0_0_20px_rgba(59,130,246,0.4)] active:scale-[0.98] flex justify-center items-center gap-2 border border-primary-400/20;
+}
+
+.btn-secondary {
+  @apply px-5 py-2.5 bg-slate-800/80 hover:bg-slate-700 text-slate-200 rounded-xl font-medium transition-all duration-300 active:scale-[0.98] flex justify-center items-center gap-2 border border-slate-600/30;
+}
+
+.btn-danger {
+  @apply px-5 py-2.5 bg-danger-500/10 hover:bg-danger-500/20 text-danger-400 rounded-xl font-medium transition-all duration-300 border border-danger-500/20 active:scale-[0.98] flex justify-center items-center gap-2;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border); 
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #334155; 
+}
