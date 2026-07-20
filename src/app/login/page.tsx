@@ -21,11 +21,11 @@ export default async function LoginPage() {
           <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-[#0b1120] shadow-xl border border-primary-500/20 mb-4 overflow-hidden relative">
             <Image src="/logo.png" alt="Logo" fill className="object-cover" priority />
           </div>
-          <h1 className="text-3xl font-bold tracking-tight text-white">ICT Inventory</h1>
-          <p className="text-slate-400 mt-2">Sign in to manage lab equipment</p>
+          <h1 className="text-3xl font-bold tracking-tight text-white">Computer Lab Inventory System</h1>
+          <p className="text-slate-400 mt-2">Rathnapura Sivali Central College</p>
         </div>
 
-        <div className="glass p-8 rounded-2xl">
+        <div className="glass p-6 sm:p-8 rounded-2xl">
           <LoginForm />
         </div>
         <p className="text-center text-xs text-slate-500 mt-8 font-semibold tracking-wider">

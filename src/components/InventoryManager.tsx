@@ -309,8 +309,8 @@ export default function InventoryManager() {
 
       {/* Modal Overlay */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex justify-center items-center p-4 z-50 animate-in fade-in duration-200">
-          <div className="bg-slate-900 w-full max-w-2xl rounded-2xl p-8 shadow-2xl border border-slate-700/50 animate-in zoom-in-95 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm flex justify-center items-center p-2 sm:p-4 z-50 animate-in fade-in duration-200">
+          <div className="bg-slate-900 w-full max-w-2xl rounded-2xl p-4 sm:p-8 shadow-2xl border border-slate-700/50 animate-in zoom-in-95 max-h-[90vh] overflow-y-auto">
             <h2 className="text-2xl font-bold text-white mb-2 tracking-tight">
               {editingId ? "Edit Equipment Details" : "Register New Equipment"}
             </h2>
