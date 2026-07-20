@@ -107,7 +107,7 @@ export default function InventoryManager() {
       setIsModalOpen(false);
       fetchData();
     } else {
-      alert("Error saving device. Please make sure the Tag Number is unique.");
+      alert("Error saving device. If the Tag Number is already used, please use a unique Tag Number.");
     }
   };
 

@@ -40,12 +40,12 @@ export async function POST(req: Request) {
 
     const baseData = {
       itemCategory,
-      serialNumber: itemCategory === "Electronic Appliance" ? serialNumber : null,
+      serialNumber: itemCategory === "Electronic Appliance" ? (serialNumber || null) : null,
       deviceType,
       brand,
-      marketValue: parseFloat(marketValue),
-      receivedDate: new Date(receivedDate),
-      receivedFrom,
+      marketValue: marketValue ? parseFloat(marketValue) : 0,
+      receivedDate: receivedDate ? new Date(receivedDate) : new Date(),
+      receivedFrom: receivedFrom || "Not Specified",
       status,
       currentLocation
     };
