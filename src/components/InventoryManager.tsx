@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Plus, Edit2, Trash2, Loader2, Search, QrCode, ChevronDown, ChevronUp, Calendar, DollarSign, Package, Settings, MapPin } from "lucide-react";
+import { Plus, Edit2, Trash2, Loader2, Search, QrCode, ChevronDown, ChevronUp, Calendar, DollarSign, Package, Settings, MapPin, Copy } from "lucide-react";
 import Link from "next/link";
 import { Device, DropdownOption } from "@prisma/client";
 
@@ -15,6 +15,7 @@ export default function InventoryManager() {
   // UI State
   const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
   const [showAdvancedDetails, setShowAdvancedDetails] = useState(false);
+  const [isAddAnother, setIsAddAnother] = useState(false);
   
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -87,6 +88,25 @@ export default function InventoryManager() {
     setIsModalOpen(true);
   };
 
+  const handleDuplicate = (device: Device) => {
+    setEditingId(null);
+    setFormData({
+      tagNumber: "",
+      itemCategory: device.itemCategory || "Electronic Appliance",
+      serialNumber: "",
+      deviceType: device.deviceType,
+      brand: device.brand,
+      marketValue: device.marketValue.toString(),
+      receivedDate: new Date(device.receivedDate).toISOString().split('T')[0],
+      receivedFrom: device.receivedFrom,
+      status: device.status,
+      currentLocation: device.currentLocation,
+      quantity: 1
+    });
+    setShowAdvancedDetails(true);
+    setIsModalOpen(true);
+  };
+
   const handleSave = async (e: React.FormEvent) => {
     e.preventDefault();
     const url = editingId ? `/api/devices/${editingId}` : "/api/devices";
@@ -104,8 +124,13 @@ export default function InventoryManager() {
     });
 
     if (res.ok) {
-      setIsModalOpen(false);
       fetchData();
+      if (isAddAnother) {
+        setFormData(prev => ({ ...prev, tagNumber: "", serialNumber: "" }));
+        setIsAddAnother(false);
+      } else {
+        setIsModalOpen(false);
+      }
     } else {
       alert("Error saving device. If the Tag Number is already used, please use a unique Tag Number.");
     }
@@ -227,6 +252,9 @@ export default function InventoryManager() {
                             <Link href={`/dashboard/inventory/${device.id}`} className="p-2 text-slate-400 hover:text-primary-400 hover:bg-primary-500/10 rounded-lg transition-all" title="View QR">
                               <QrCode className="w-4 h-4" />
                             </Link>
+                            <button onClick={(e) => { e.stopPropagation(); handleDuplicate(device); }} className="p-2 text-slate-400 hover:text-white hover:bg-slate-700/80 rounded-lg transition-all" title="Duplicate Item">
+                              <Copy className="w-4 h-4" />
+                            </button>
                             <button onClick={(e) => { e.stopPropagation(); handleOpenModal(device); }} className="p-2 text-slate-400 hover:text-white hover:bg-slate-700/80 rounded-lg transition-all" title="Edit Item">
                               <Edit2 className="w-4 h-4" />
                             </button>
@@ -398,8 +426,13 @@ export default function InventoryManager() {
                 <button type="button" onClick={() => setIsModalOpen(false)} className="btn-secondary w-full sm:w-auto">
                   Cancel
                 </button>
-                <button type="submit" className="btn-primary w-full sm:w-auto shadow-primary-500/20 shadow-lg">
-                  {editingId ? "Save Changes" : "Register Item(s)"}
+                {!editingId && (
+                  <button type="submit" onClick={() => setIsAddAnother(true)} className="btn-secondary w-full sm:w-auto border-primary-500/50 text-primary-400 hover:bg-primary-500/10">
+                    Save & Add Another
+                  </button>
+                )}
+                <button type="submit" onClick={() => setIsAddAnother(false)} className="btn-primary w-full sm:w-auto shadow-primary-500/20 shadow-lg">
+                  {editingId ? "Save Changes" : "Register Item"}
                 </button>
               </div>
             </form>
