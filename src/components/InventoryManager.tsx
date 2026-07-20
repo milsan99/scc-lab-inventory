@@ -368,7 +368,7 @@ export default function InventoryManager() {
                   }}>
                     <option value="">Select Type</option>
                     {deviceTypes.map(opt => <option key={opt.id} value={opt.value}>{opt.value}</option>)}
-                    <option value="__ADD_NEW__" className="font-semibold text-primary-400">+ Add New Type...</option>
+                    <option value="__ADD_NEW__" className="font-bold text-slate-900 bg-slate-200">+ Add New Type...</option>
                   </select>
                 )}
               </div>
@@ -391,7 +391,7 @@ export default function InventoryManager() {
                   }}>
                     <option value="">Select Brand</option>
                     {brands.map(opt => <option key={opt.id} value={opt.value}>{opt.value}</option>)}
-                    <option value="__ADD_NEW__" className="font-semibold text-primary-400">+ Add New Brand...</option>
+                    <option value="__ADD_NEW__" className="font-bold text-slate-900 bg-slate-200">+ Add New Brand...</option>
                   </select>
                 )}
               </div>
