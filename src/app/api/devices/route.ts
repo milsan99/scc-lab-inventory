@@ -50,6 +50,29 @@ export async function POST(req: Request) {
       currentLocation
     };
 
+    // Auto-save new Dropdown Options if they are new
+    if (deviceType) {
+      const existingType = await prisma.dropdownOption.findFirst({
+        where: { category: "DEVICE_TYPE", value: deviceType }
+      });
+      if (!existingType) {
+        await prisma.dropdownOption.create({
+          data: { category: "DEVICE_TYPE", value: deviceType }
+        });
+      }
+    }
+
+    if (brand) {
+      const existingBrand = await prisma.dropdownOption.findFirst({
+        where: { category: "BRAND", value: brand }
+      });
+      if (!existingBrand) {
+        await prisma.dropdownOption.create({
+          data: { category: "BRAND", value: brand }
+        });
+      }
+    }
+
     if (itemCategory === "Non-Electronic Item" && quantity > 1) {
       // Bulk insert
       const recordsToCreate = [];

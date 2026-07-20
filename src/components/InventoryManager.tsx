@@ -16,6 +16,8 @@ export default function InventoryManager() {
   const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
   const [showAdvancedDetails, setShowAdvancedDetails] = useState(false);
   const [isAddAnother, setIsAddAnother] = useState(false);
+  const [isNewDeviceType, setIsNewDeviceType] = useState(false);
+  const [isNewBrand, setIsNewBrand] = useState(false);
   
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({
@@ -67,6 +69,8 @@ export default function InventoryManager() {
         currentLocation: device.currentLocation,
         quantity: 1
       });
+      setIsNewDeviceType(false);
+      setIsNewBrand(false);
       setShowAdvancedDetails(false);
     } else {
       setEditingId(null);
@@ -83,6 +87,8 @@ export default function InventoryManager() {
         currentLocation: "",
         quantity: 1
       });
+      setIsNewDeviceType(false);
+      setIsNewBrand(false);
       setShowAdvancedDetails(false);
     }
     setIsModalOpen(true);
@@ -103,6 +109,8 @@ export default function InventoryManager() {
       currentLocation: device.currentLocation,
       quantity: 1
     });
+    setIsNewDeviceType(false);
+    setIsNewBrand(false);
     setShowAdvancedDetails(true);
     setIsModalOpen(true);
   };
@@ -128,6 +136,8 @@ export default function InventoryManager() {
       if (isAddAnother) {
         setFormData(prev => ({ ...prev, tagNumber: "", serialNumber: "" }));
         setIsAddAnother(false);
+        setIsNewDeviceType(false);
+        setIsNewBrand(false);
       } else {
         setIsModalOpen(false);
       }
@@ -342,18 +352,48 @@ export default function InventoryManager() {
               
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Item Type</label>
-                <select required className="input-style" value={formData.deviceType} onChange={e => setFormData({...formData, deviceType: e.target.value})}>
-                  <option value="">Select Type</option>
-                  {deviceTypes.map(opt => <option key={opt.id} value={opt.value}>{opt.value}</option>)}
-                </select>
+                {isNewDeviceType ? (
+                  <div className="flex gap-2">
+                    <input required className="input-style flex-1" value={formData.deviceType} onChange={e => setFormData({...formData, deviceType: e.target.value})} placeholder="Type new device type..." autoFocus />
+                    <button type="button" onClick={() => {setIsNewDeviceType(false); setFormData({...formData, deviceType: ""})}} className="px-3 bg-slate-800 rounded-lg text-slate-400 hover:text-white border border-slate-700">Cancel</button>
+                  </div>
+                ) : (
+                  <select required className="input-style" value={formData.deviceType} onChange={e => {
+                    if (e.target.value === "__ADD_NEW__") {
+                      setIsNewDeviceType(true);
+                      setFormData({...formData, deviceType: ""});
+                    } else {
+                      setFormData({...formData, deviceType: e.target.value});
+                    }
+                  }}>
+                    <option value="">Select Type</option>
+                    {deviceTypes.map(opt => <option key={opt.id} value={opt.value}>{opt.value}</option>)}
+                    <option value="__ADD_NEW__" className="font-semibold text-primary-400">+ Add New Type...</option>
+                  </select>
+                )}
               </div>
 
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Brand / Manufacturer</label>
-                <select required className="input-style" value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})}>
-                  <option value="">Select Brand</option>
-                  {brands.map(opt => <option key={opt.id} value={opt.value}>{opt.value}</option>)}
-                </select>
+                {isNewBrand ? (
+                  <div className="flex gap-2">
+                    <input required className="input-style flex-1" value={formData.brand} onChange={e => setFormData({...formData, brand: e.target.value})} placeholder="Type new brand..." autoFocus />
+                    <button type="button" onClick={() => {setIsNewBrand(false); setFormData({...formData, brand: ""})}} className="px-3 bg-slate-800 rounded-lg text-slate-400 hover:text-white border border-slate-700">Cancel</button>
+                  </div>
+                ) : (
+                  <select required className="input-style" value={formData.brand} onChange={e => {
+                    if (e.target.value === "__ADD_NEW__") {
+                      setIsNewBrand(true);
+                      setFormData({...formData, brand: ""});
+                    } else {
+                      setFormData({...formData, brand: e.target.value});
+                    }
+                  }}>
+                    <option value="">Select Brand</option>
+                    {brands.map(opt => <option key={opt.id} value={opt.value}>{opt.value}</option>)}
+                    <option value="__ADD_NEW__" className="font-semibold text-primary-400">+ Add New Brand...</option>
+                  </select>
+                )}
               </div>
 
               <div className="space-y-1.5">

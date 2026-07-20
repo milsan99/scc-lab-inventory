@@ -15,6 +15,28 @@ export async function PUT(req: Request, { params }: { params: Promise<{ id: stri
       receivedDate, receivedFrom, status, currentLocation 
     } = body;
 
+    if (deviceType) {
+      const existingType = await prisma.dropdownOption.findFirst({
+        where: { category: "DEVICE_TYPE", value: deviceType }
+      });
+      if (!existingType) {
+        await prisma.dropdownOption.create({
+          data: { category: "DEVICE_TYPE", value: deviceType }
+        });
+      }
+    }
+
+    if (brand) {
+      const existingBrand = await prisma.dropdownOption.findFirst({
+        where: { category: "BRAND", value: brand }
+      });
+      if (!existingBrand) {
+        await prisma.dropdownOption.create({
+          data: { category: "BRAND", value: brand }
+        });
+      }
+    }
+
     const device = await prisma.device.update({
       where: { id },
       data: {
