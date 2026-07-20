@@ -444,7 +444,7 @@ export default function InventoryManager() {
 
                     <div className="space-y-1.5">
                       <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Market Value (Rs.)</label>
-                      <input required type="number" step="0.01" className="input-style bg-slate-900" value={formData.marketValue} onChange={e => setFormData({...formData, marketValue: e.target.value})} placeholder="0.00" />
+                      <input type="number" step="0.01" className="input-style bg-slate-900" value={formData.marketValue} onChange={e => setFormData({...formData, marketValue: e.target.value})} placeholder="0.00" />
                     </div>
 
                     <div className="space-y-1.5">
@@ -454,7 +454,7 @@ export default function InventoryManager() {
 
                     <div className="space-y-1.5 md:col-span-2">
                       <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Received From / Supplier</label>
-                      <input required className="input-style bg-slate-900" value={formData.receivedFrom} onChange={e => setFormData({...formData, receivedFrom: e.target.value})} placeholder="e.g. Ministry of Education, Donation" />
+                      <input className="input-style bg-slate-900" value={formData.receivedFrom} onChange={e => setFormData({...formData, receivedFrom: e.target.value})} placeholder="e.g. Ministry of Education, Donation" />
                     </div>
 
                   </div>
