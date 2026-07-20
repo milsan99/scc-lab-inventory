@@ -54,7 +54,7 @@ export default function DashboardNavigation({ userName }: { userName: string | n
         md:relative md:translate-x-0
         ${isOpen ? "translate-x-0" : "-translate-x-full"}
       `}>
-        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800/50">
+        <div className="min-h-[4rem] py-4 flex items-center justify-between px-6 border-b border-slate-800/50">
           <div className="flex items-center">
             <div className="w-10 h-10 rounded-xl bg-[#0b1120] border border-primary-500/30 flex items-center justify-center mr-3 overflow-hidden relative">
               <Image src="/logo.png" alt="Logo" fill className="object-cover" priority />
