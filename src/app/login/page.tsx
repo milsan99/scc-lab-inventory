@@ -18,8 +18,8 @@ export default async function LoginPage() {
 
       <div className="w-full max-w-md z-10 animate-in fade-in zoom-in duration-500">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-[#0b1120] shadow-xl border border-primary-500/20 mb-4 overflow-hidden relative">
-            <Image src="/logo.png" alt="Logo" fill className="object-cover" priority />
+          <div className="inline-flex items-center justify-center w-28 h-28 rounded-3xl bg-slate-900 shadow-xl border border-primary-500/20 mb-4 overflow-hidden relative">
+            <Image src="/logo.png" alt="Logo" fill className="object-contain p-2" priority />
           </div>
           <h1 className="text-3xl font-bold tracking-tight text-white">Computer Lab Inventory System</h1>
           <p className="text-slate-400 mt-2">Rathnapura Sivali Central College</p>

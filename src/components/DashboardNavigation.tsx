@@ -27,8 +27,8 @@ export default function DashboardNavigation({ userName }: { userName: string | n
       {/* Mobile Top Navbar */}
       <div className="md:hidden flex items-center justify-between p-4 bg-[#0b1120] border-b border-slate-800/50 sticky top-0 z-40">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-lg bg-[#0b1120] border border-primary-500/30 flex items-center justify-center relative overflow-hidden">
-            <Image src="/logo.png" alt="Logo" fill className="object-cover" priority />
+          <div className="w-9 h-9 rounded-lg bg-slate-100 border border-slate-300 flex items-center justify-center relative overflow-hidden">
+            <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" priority />
           </div>
           <div className="flex flex-col">
             <span className="text-base font-bold text-white tracking-tight leading-tight">Computer Lab Inventory</span>
@@ -56,8 +56,8 @@ export default function DashboardNavigation({ userName }: { userName: string | n
       `}>
         <div className="min-h-[4rem] py-4 flex items-center justify-between px-6 border-b border-slate-800/50">
           <div className="flex items-center">
-            <div className="w-10 h-10 rounded-xl bg-[#0b1120] border border-primary-500/30 flex items-center justify-center mr-3 overflow-hidden relative">
-              <Image src="/logo.png" alt="Logo" fill className="object-cover" priority />
+            <div className="w-10 h-10 rounded-xl bg-slate-100 border border-slate-300 flex items-center justify-center mr-3 overflow-hidden relative">
+              <Image src="/logo.png" alt="Logo" fill className="object-contain p-1" priority />
             </div>
             <div className="flex flex-col">
               <span className="text-base font-bold text-white tracking-tight leading-tight">Computer Lab Inventory</span>
